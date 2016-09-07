@@ -1,0 +1,22 @@
+{
+  "name": "mern-tutorial",
+  "version": "1.0.0",
+  "description": "React Tutorial using MERN stack",
+  "main": "webapp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stcho/mern-tutorial.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stcho/mern-tutorial/issues"
+  },
+  "homepage": "https://github.com/stcho/mern-tutorial#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
