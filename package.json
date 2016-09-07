@@ -18,5 +18,9 @@
   "homepage": "https://github.com/stcho/mern-tutorial#readme",
   "dependencies": {
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-preset-react": "^6.11.1"
   }
 }
