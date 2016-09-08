@@ -1,8 +1,3 @@
-var bugdata = [
-	{id : 1, status : "Open", priority : "P1", owner : "Ravan", title : "App crashes on open" },
-	{id : 2, status : "New", priority : "P2", owner : "Eddie", title : "Misaligned border on panel" }
-];
-
 var BugRow = React.createClass({
 	render: function() {
 		console.log("Rendering BugRow:", this.props.bug);
@@ -77,15 +72,37 @@ var BugAdd = React.createClass({
 var BugList = React.createClass({
 	getInitialState: function() {
 		return (
-			{bugs: bugdata}
+			{bugs: []}
 		);
+	},
+	componentDidMount: function() {
+		$.ajax({
+			url: '/api/bugs',
+			success: function(data) {
+				this.setState({bugs: data});
+			}.bind(this),
+			error: function(xhr, status, err) {
+				console.error(err.toString());
+			}.bind(this)
+		});
 	},
 	addBug: function(bug) {
 		console.log("Adding bug:", bug);
-		var bugsModified = this.state.bugs.slice();
-		bug.id = this.state.bugs.length + 1;
-		bugsModified.push(bug);
-		this.setState({bugs: bugsModified});
+		$.ajax({
+			url: '/api/bugs',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(bug),
+			success: function(data) {
+				var bug = data;
+
+				var bugsModified = this.state.bugs.concat(bug);
+				this.setState({bugs: bugsModified});
+			}.bind(this),
+			error: function(xhr, status, err) {
+				console.log("Error adding bug:", err);
+			}
+		});
 	},
 	render: function() {
 		console.log("Rendering bug list, num items:", this.state.bugs.length);
@@ -103,6 +120,6 @@ var BugList = React.createClass({
 });
 
 ReactDOM.render(
-  <BugList bugs={bugdata}/>,
+  <BugList />,
   document.getElementById('main')
 );
