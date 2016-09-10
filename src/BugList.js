@@ -56,15 +56,12 @@ var BugList = React.createClass({
 		);
 	},
 	componentDidMount: function() {
-		$.ajax({
-			url: '/api/bugs',
-			success: function(data) {
-				this.setState({bugs: data});
-			}.bind(this),
-			error: function(xhr, status, err) {
-				console.error(err.toString());
-			}.bind(this)
-		});
+		this.loadData({});
+	},
+	loadData: function(filter) {
+		$.ajax('/api/bugs', {data: filter}).done(function(data) {
+			this.setState({bugs: data});
+		}.bind(this));
 	},
 	addBug: function(bug) {
 		console.log("Adding bug:", bug);
@@ -89,7 +86,7 @@ var BugList = React.createClass({
 		return (
 			<div>
 				<h1>Bug Tracker</h1>
-				<BugFilter />
+				<BugFilter submitHandler={this.loadData} />
 				<hr />
 				<BugTable bugs={this.state.bugs}/>
 				<hr />
