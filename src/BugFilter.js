@@ -21,7 +21,7 @@ var BugFilter = React.createClass({
 				<h3>Filter</h3>
 				Status:
 				<select value={this.state.status} onChange={this.onChangeStatus}>
-					<option value="">(Any)</option>
+					<option value="">(Any)</option>	
 					<option value="New">New</option>
 					<option value="Open">Open</option>
 					<option value="Closed">Closed</option>
