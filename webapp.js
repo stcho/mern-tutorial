@@ -34,7 +34,7 @@ app.get('/api/bugs/:id', function(req, res){
 		})
 });
 
-app.put('/api/bugs/:id' function(req, res) {
+app.put('/api/bugs/:id', function(req, res) {
 	var bug = req.body;
 	var oid = ObjectId(req.params.id);
 	db.collection('bugs').updateOne({_id: oid}, bug, function(err, result) {
